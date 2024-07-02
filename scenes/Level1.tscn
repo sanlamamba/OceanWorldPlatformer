@@ -1,8 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://do8mrfk3gny2e"]
+[gd_scene load_steps=12 format=3 uid="uid://do8mrfk3gny2e"]
 
 [ext_resource type="PackedScene" uid="uid://crf1mifk8yqf5" path="res://scenes/Player.tscn" id="1_f1k73"]
 [ext_resource type="Texture2D" uid="uid://b4bpg6hmamxm4" path="res://assets/brackeys_platformer_assets/sprites/world_tileset.png" id="2_vhg37"]
 [ext_resource type="PackedScene" uid="uid://beweduqij1e6b" path="res://scenes/grass_platform.tscn" id="3_wmsrg"]
+[ext_resource type="PackedScene" uid="uid://dadhsue35ba45" path="res://scenes/coin.tscn" id="4_c40dk"]
+[ext_resource type="PackedScene" uid="uid://d0esgmn60ust5" path="res://scenes/killzone.tscn" id="5_x8wcu"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1abpa"]
 texture = ExtResource("2_vhg37")
@@ -408,22 +410,8 @@ texture = ExtResource("2_vhg37")
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_1abpa")
 
-[sub_resource type="Animation" id="Animation_kaktk"]
-resource_name = "grass_platform_movement"
-length = 1.5
-loop_mode = 2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(16, 80), Vector2(96, 80)]
-}
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_xysjn"]
+distance = 8.0
 
 [sub_resource type="Animation" id="Animation_j1rpy"]
 length = 1.5
@@ -441,6 +429,23 @@ tracks/0/keys = {
 "values": [Vector2(16, 80), Vector2(97, 80)]
 }
 
+[sub_resource type="Animation" id="Animation_kaktk"]
+resource_name = "grass_platform_movement"
+length = 1.5
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(16, 80), Vector2(96, 80)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5emly"]
 _data = {
 "RESET": SubResource("Animation_j1rpy"),
@@ -452,20 +457,67 @@ _data = {
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_30c3n")
 format = 2
-layer_0/tile_data = PackedInt32Array(-2, 0, 0, -1, 0, 0, -65536, 0, 0, -65535, 0, 0, 65534, 0, 1, 65535, 0, 1, 0, 65536, 0, 1, 0, 1, -131069, 0, 0, -65533, 0, 1, -131068, 0, 0, -65532, 0, 1, -131067, 0, 0, -65531, 0, 1, -131066, 0, 0, -65530, 0, 1, -131065, 0, 0, -65529, 0, 1, -262135, 0, 0, -196599, 0, 1, -262134, 0, 0, -196598, 0, 1, -262133, 0, 0, -196597, 0, 1, -262132, 0, 0, -196596, 0, 1, -262131, 0, 0, -196595, 0, 1, 262151, 262144, 0, 262152, 262144, 0, 196616, 262144, 0, 196617, 262144, 0, 196618, 262144, 0, 131082, 262144, 0, 131083, 262144, 0, -196592, 393216, 0, -131056, 393216, 0, -131055, 393216, 0, -131054, 393216, 0, -131053, 393216, 0, -65517, 393216, 0, -65516, 393216, 0, 20, 393216, 0, 21, 393216, 0, 131084, 589824, 2, 131085, 655360, 2, 131086, 720896, 2, 22, 589824, 0, 23, 655360, 0, 24, 720896, 0, 25, 393216, 0, 26, 393216, 0, 27, 393216, 0, -65509, 393216, 0, -65508, 393216, 0, -131044, 393216, 0, -131043, 393216, 0, -196579, 393216, 0, 131087, 262144, 0, 131088, 262144, 0, 196624, 262144, 0, 196625, 262144, 0, 196626, 262144, 0, 196627, 262144, 0, 262163, 262144, 0, 262164, 262144, 0, 262165, 262144, 0, 262166, 262144, 0, 262168, 262144, 0, 196632, 262144, 0, 262170, 262144, 0, 196634, 262144, 0, 262172, 262144, 0, 196636, 262144, 0, 65547, 524288, 6, 196628, 262144, 8, -65538, 65536, 6, -327669, 131072, 8, -458741, 131072, 4, 393215, 524288, 3, 458747, 131072, 0, 458748, 131072, 0, 458749, 131072, 0, 458750, 131072, 0, 458751, 131072, 0)
+layer_0/tile_data = PackedInt32Array(-2, 0, 0, -1, 0, 0, -65536, 0, 0, -65535, 0, 0, 65534, 0, 1, 65535, 0, 1, 0, 65536, 0, 1, 0, 1, -131069, 0, 0, -65533, 0, 1, -131068, 0, 0, -65532, 0, 1, -131067, 0, 0, -65531, 0, 1, -131066, 0, 0, -65530, 0, 1, -131065, 0, 0, -65529, 0, 1, -262135, 0, 0, -196599, 0, 1, -262134, 0, 0, -196598, 0, 1, -262133, 0, 0, -196597, 0, 1, -262132, 0, 0, -196596, 0, 1, -262131, 0, 0, -196595, 0, 1, 262151, 262144, 0, 262152, 262144, 0, 196616, 262144, 0, 196617, 262144, 0, 196618, 262144, 0, 131082, 262144, 0, 131083, 262144, 0, -196592, 393216, 0, -131056, 393216, 0, -131055, 393216, 0, -131054, 393216, 0, -131053, 393216, 0, -65517, 393216, 0, -65516, 393216, 0, 20, 393216, 0, 21, 393216, 0, 131084, 589824, 2, 131085, 655360, 2, 131086, 720896, 2, 22, 589824, 0, 23, 655360, 0, 24, 720896, 0, 25, 393216, 0, 26, 393216, 0, 27, 393216, 0, -65509, 393216, 0, -65508, 393216, 0, -131044, 393216, 0, -131043, 393216, 0, -196579, 393216, 0, 131087, 262144, 0, 131088, 262144, 0, 196624, 262144, 0, 196625, 262144, 0, 196626, 262144, 0, 196627, 262144, 0, 262163, 262144, 0, 262164, 262144, 0, 262165, 262144, 0, 262166, 262144, 0, 65547, 524288, 6, 196628, 262144, 8, -65538, 65536, 6, -327669, 131072, 8, -458741, 131072, 4, 393215, 524288, 3, 458747, 131072, 0, 458748, 131072, 0, 458749, 131072, 0, 458750, 131072, 0, 458751, 131072, 0, 262169, 262144, 0, 327705, 262144, 0, 262171, 262144, 0, 327707, 262144, 0, 262173, 262144, 0, 327709, 262144, 0)
 
-[node name="CharacterBody2D" parent="." instance=ExtResource("1_f1k73")]
+[node name="Player" parent="." instance=ExtResource("1_f1k73")]
 position = Vector2(-1, -14)
 
-[node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
+[node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(2, 14)
 zoom = Vector2(3, 3)
+limit_left = -120
+limit_right = 500
+limit_bottom = 120
+limit_smoothed = true
 position_smoothing_enabled = true
 
-[node name="AnimatableBody2D" parent="." instance=ExtResource("3_wmsrg")]
+[node name="Killzone" parent="." instance=ExtResource("5_x8wcu")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone"]
+position = Vector2(1, 139)
+shape = SubResource("WorldBoundaryShape2D_xysjn")
+
+[node name="Coins" type="Node" parent="."]
+
+[node name="Coin" parent="Coins" instance=ExtResource("4_c40dk")]
+position = Vector2(23, -25)
+
+[node name="Coin2" parent="Coins" instance=ExtResource("4_c40dk")]
+position = Vector2(72, -40)
+
+[node name="Coin3" parent="Coins" instance=ExtResource("4_c40dk")]
+position = Vector2(88, -40)
+
+[node name="Coin4" parent="Coins" instance=ExtResource("4_c40dk")]
+position = Vector2(105, -40)
+
+[node name="Coin5" parent="Coins" instance=ExtResource("4_c40dk")]
+position = Vector2(16, 67)
+
+[node name="Coin6" parent="Coins" instance=ExtResource("4_c40dk")]
+position = Vector2(32, 67)
+
+[node name="Coin7" parent="Coins" instance=ExtResource("4_c40dk")]
+position = Vector2(47, 67)
+
+[node name="Coin8" parent="Coins" instance=ExtResource("4_c40dk")]
+position = Vector2(217, 11)
+
+[node name="Coin9" parent="Coins" instance=ExtResource("4_c40dk")]
+position = Vector2(409, 54)
+
+[node name="Coin10" parent="Coins" instance=ExtResource("4_c40dk")]
+position = Vector2(441, 54)
+
+[node name="Coin11" parent="Coins" instance=ExtResource("4_c40dk")]
+position = Vector2(474, 54)
+
+[node name="Platforms" type="Node" parent="."]
+
+[node name="Grass_platform" parent="Platforms" instance=ExtResource("3_wmsrg")]
 position = Vector2(16, 80)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="AnimatableBody2D"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Platforms/Grass_platform"]
 libraries = {
 "": SubResource("AnimationLibrary_5emly")
 }
