@@ -104,9 +104,9 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_quy5d")
 }],
-"loop": false,
+"loop": true,
 "name": &"double_jump",
-"speed": 3.0
+"speed": 7.0
 }, {
 "frames": [{
 "duration": 1.0,
