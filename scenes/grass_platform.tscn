@@ -6,6 +6,7 @@
 size = Vector2(32, 8)
 
 [node name="grass_platform" type="AnimatableBody2D"]
+collision_mask = 7
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_yxa8d")
