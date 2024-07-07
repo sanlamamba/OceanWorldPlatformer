@@ -11,14 +11,6 @@ region = Rect2(0, 0, 32, 32)
 atlas = ExtResource("1_fwtk5")
 region = Rect2(64, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_xla2e"]
-atlas = ExtResource("1_fwtk5")
-region = Rect2(0, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_quy5d"]
-atlas = ExtResource("1_fwtk5")
-region = Rect2(64, 0, 32, 32)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_d3ctc"]
 atlas = ExtResource("1_fwtk5")
 region = Rect2(0, 0, 32, 32)
@@ -214,7 +206,7 @@ sprite_frames = SubResource("SpriteFrames_jk741")
 animation = &"double_jump"
 autoplay = "idle"
 frame = 1
-frame_progress = 0.41818
+frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -7)
@@ -223,19 +215,26 @@ shape = SubResource("CapsuleShape2D_lpf32")
 [node name="left_outer" type="RayCast2D" parent="."]
 position = Vector2(-4, -12)
 target_position = Vector2(0, -5)
-collision_mask = 5
+collision_mask = 13
+collide_with_areas = true
 
 [node name="left_inner" type="RayCast2D" parent="."]
 position = Vector2(-2, -12)
 target_position = Vector2(0, -5)
-collision_mask = 5
+collision_mask = 13
+collide_with_areas = true
 
 [node name="right_inner" type="RayCast2D" parent="."]
 position = Vector2(2, -12)
 target_position = Vector2(0, -5)
-collision_mask = 5
+collision_mask = 13
+collide_with_areas = true
 
 [node name="right_outer" type="RayCast2D" parent="."]
 position = Vector2(4, -12)
 target_position = Vector2(0, -5)
-collision_mask = 5
+collision_mask = 13
+collide_with_areas = true
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.1

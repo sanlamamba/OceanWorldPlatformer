@@ -11,14 +11,6 @@ region = Rect2(0, 0, 32, 32)
 atlas = ExtResource("1_fwtk5")
 region = Rect2(64, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_xla2e"]
-atlas = ExtResource("1_fwtk5")
-region = Rect2(0, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_quy5d"]
-atlas = ExtResource("1_fwtk5")
-region = Rect2(64, 0, 32, 32)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_d3ctc"]
 atlas = ExtResource("1_fwtk5")
 region = Rect2(0, 0, 32, 32)
@@ -196,14 +188,15 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lpf32"]
-radius = 5.0
-height = 12.0
+radius = 6.0
+height = 16.0
 
 [node name="Player" type="CharacterBody2D"]
 z_index = 5
 collision_layer = 2
 collision_mask = 13
 script = ExtResource("1_pycbt")
+move_speed = null
 jump_height = 35.0
 jump_time_to_peak = 0.3
 jump_time_to_decent = 0.35
@@ -214,28 +207,38 @@ sprite_frames = SubResource("SpriteFrames_jk741")
 animation = &"double_jump"
 autoplay = "idle"
 frame = 1
-frame_progress = 0.41818
+frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -7)
+position = Vector2(0, -8)
 shape = SubResource("CapsuleShape2D_lpf32")
 
-[node name="left_outer" type="RayCast2D" parent="."]
-position = Vector2(-4, -12)
-target_position = Vector2(0, -5)
-collision_mask = 5
+[node name="RayCasts" type="Node" parent="."]
 
-[node name="left_inner" type="RayCast2D" parent="."]
-position = Vector2(-2, -12)
-target_position = Vector2(0, -5)
-collision_mask = 5
+[node name="left_outer" type="RayCast2D" parent="RayCasts"]
+position = Vector2(0, -14)
+target_position = Vector2(-5, -10)
+collide_with_areas = true
+collide_with_bodies = false
+metadata/_edit_group_ = true
 
-[node name="right_inner" type="RayCast2D" parent="."]
-position = Vector2(2, -12)
-target_position = Vector2(0, -5)
-collision_mask = 5
+[node name="left_inner" type="RayCast2D" parent="RayCasts"]
+position = Vector2(0, -14)
+target_position = Vector2(-2, -10)
+collide_with_areas = true
+collide_with_bodies = false
+metadata/_edit_group_ = true
 
-[node name="right_outer" type="RayCast2D" parent="."]
-position = Vector2(4, -12)
-target_position = Vector2(0, -5)
-collision_mask = 5
+[node name="right_inner" type="RayCast2D" parent="RayCasts"]
+position = Vector2(0, -14)
+target_position = Vector2(1, -10)
+collide_with_areas = true
+collide_with_bodies = false
+metadata/_edit_group_ = true
+
+[node name="right_outer" type="RayCast2D" parent="RayCasts"]
+position = Vector2(0, -14)
+target_position = Vector2(4, -9)
+collide_with_areas = true
+collide_with_bodies = false
+metadata/_edit_group_ = true

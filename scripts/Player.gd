@@ -23,7 +23,7 @@ func apply_gravity(delta: float) -> void:
 		velocity.y += gravity * delta
 
 func handle_jump() -> void:
-	if Input.is_action_just_pressed("ui_accept"):
+	if Input.is_action_just_pressed("jump"):
 		attempt_jump()
 
 func attempt_jump() -> void:
@@ -33,7 +33,7 @@ func attempt_jump() -> void:
 		just_double_jumped = not is_on_floor()
 
 func handle_movement(delta: float) -> void:
-	var direction: float = Input.get_axis("ui_left", "ui_right")
+	var direction: float = Input.get_axis("left", "right")
 	velocity.x = direction * SPEED
 	animated_sprite.flip_h = direction < 0
 	if direction == 0:
